@@ -1,7 +1,5 @@
 import { FaRegComment } from "react-icons/fa";
-import { BiRepost } from "react-icons/bi";
 import { FaRegHeart } from "react-icons/fa";
-import { FaRegBookmark } from "react-icons/fa6";
 import { FaTrash } from "react-icons/fa";
 import { useState } from "react";
 import { Link } from "react-router-dom";
@@ -145,18 +143,18 @@ const Post = ({ post }) => {
 
 	return (
 		<>
-			<div className='flex gap-2 items-start p-4 border-b border-gray-700'>
+			<article className='group mx-4 mb-4 flex items-start gap-3 rounded-3xl border border-white/10 bg-white/[0.025] p-4 transition duration-300 hover:-translate-y-0.5 hover:border-sky-400/20 hover:bg-white/[0.045] hover:shadow-2xl hover:shadow-black/20'>
 				<div className='avatar'>
-					<Link to={`/profile/${postOwner.username}`} className='w-8 rounded-full overflow-hidden'>
+					<Link to={`/profile/${postOwner.username}`} className='w-10 overflow-hidden rounded-full ring-2 ring-white/10 transition group-hover:ring-sky-400/30'>
 						<img src={postOwner.profileImg || "/avatar-placeholder.png"} />
 					</Link>
 				</div>
-				<div className='flex flex-col flex-1'>
-					<div className='flex gap-2 items-center'>
-						<Link to={`/profile/${postOwner.username}`} className='font-bold'>
+				<div className='min-w-0 flex-1'>
+					<div className='flex min-w-0 items-center gap-2'>
+						<Link to={`/profile/${postOwner.username}`} className='truncate font-bold text-slate-100 transition hover:text-sky-300'>
 							{postOwner.fullName}
 						</Link>
-						<span className='text-blue flex gap-1 text-sm'>
+						<span className='flex min-w-0 gap-1 truncate text-sm text-slate-500'>
 							<Link to={`/profile/${postOwner.username}`}>@{postOwner.username}</Link>
 							<span>·</span>
 							<span>{formattedDate}</span>
@@ -164,38 +162,38 @@ const Post = ({ post }) => {
 						{isMyPost && (
 							<span className='flex justify-end flex-1'>
 								{!isDeleting && (
-									<FaTrash className='cursor-pointer hover:text-red-500' onClick={handleDeletePost} />
+									<FaTrash className='cursor-pointer text-slate-600 transition hover:text-rose-400' onClick={handleDeletePost} />
 								)}
 
 								{isDeleting && <LoadingSpinner size='sm' />}
 							</span>
 						)}
 					</div>
-					<div className='flex flex-col gap-3 overflow-hidden'>
-						<span>{post.text}</span>
+					<div className='mt-1 flex flex-col gap-3 overflow-hidden'>
+						<span className='whitespace-pre-wrap leading-6 text-slate-200'>{post.text}</span>
 						{post.img && (
 							<img
 								src={post.img}
-								className='h-80 object-contain rounded-lg border border-gray-700'
-								alt=''
+								className='max-h-[520px] w-full rounded-2xl border border-white/10 bg-black/20 object-contain'
+								alt='Post attachment'
 							/>
 						)}
 					</div>
-					<div className='flex justify-between mt-3'>
-						<div className='flex gap-4 items-center w-2/3 justify-between'>
+					<div className='mt-4 flex justify-between'>
+						<div className='flex w-2/3 items-center justify-between gap-4'>
 
 
-						<div className='flex gap-1 items-center group cursor-pointer' onClick={handleLikePost}>
+						<div className='group/action flex cursor-pointer items-center gap-2 rounded-full px-2 py-1 transition hover:bg-pink-500/10' onClick={handleLikePost}>
 								{isLiking && <LoadingSpinner size='sm' />}
 								{!isLiked && !isLiking && (
-									<FaRegHeart className='w-4 h-4 cursor-pointer text-slate-500 group-hover:text-pink-500' />
+									<FaRegHeart className='h-4 w-4 cursor-pointer text-slate-500 group-hover/action:text-pink-400' />
 								)}
 								{isLiked && !isLiking && (
 									<FaRegHeart className='w-4 h-4 cursor-pointer text-pink-500 ' />
 								)}
 
 								<span
-									className={`text-sm text-slate-500 group-hover:text-pink-500 ${
+									className={`text-sm text-slate-500 group-hover/action:text-pink-400 ${
 										isLiked ? "text-pink-500" : ""
 									}`}
 								>
@@ -203,17 +201,17 @@ const Post = ({ post }) => {
 								</span>
 							</div>
 							<div
-								className='flex gap-1 items-center cursor-pointer group'
+								className='group/action flex cursor-pointer items-center gap-2 rounded-full px-2 py-1 transition hover:bg-sky-400/10'
 								onClick={() => document.getElementById("comments_modal" + post._id).showModal()}
 							>
-								<FaRegComment className='w-4 h-4  text-slate-500 group-hover:text-sky-400' />
-								<span className='text-sm text-slate-500 group-hover:text-sky-400'>
+								<FaRegComment className='h-4 w-4 text-slate-500 group-hover/action:text-sky-400' />
+								<span className='text-sm text-slate-500 group-hover/action:text-sky-400'>
 									{post.comments.length}
 								</span>
 							</div>
 							{/* We're using Modal Component from DaisyUI */}
 							<dialog id={`comments_modal${post._id}`} className='modal border-none outline-none'>
-								<div className='modal-box rounded border border-gray-600'>
+								<div className='modal-box rounded-3xl border border-white/10 bg-[#0b1120] shadow-2xl'>
 									<h3 className='font-bold text-lg mb-4'>Comments</h3>
 									<div className='flex flex-col gap-3 max-h-60 overflow-auto'>
 										{post.comments.length === 0 && (
@@ -233,7 +231,7 @@ const Post = ({ post }) => {
 												<div className='flex flex-col'>
 													<div className='flex items-center gap-1'>
 														<span className='font-bold'>{comment.user.fullName}</span>
-														<span className='text-gray-700 text-sm'>
+													<span className='text-slate-500 text-sm'>
 															@{comment.user.username}
 														</span>
 													</div>
@@ -243,16 +241,16 @@ const Post = ({ post }) => {
 										))}
 									</div>
 									<form
-										className='flex gap-2 items-center mt-4 border-t border-gray-600 pt-2'
+										className='mt-4 flex items-center gap-2 border-t border-white/10 pt-3'
 										onSubmit={handlePostComment}
 									>
 										<textarea
-											className='textarea w-full p-1 rounded text-md resize-none border focus:outline-none  border-gray-800'
+											className='min-h-12 w-full resize-none rounded-xl border border-white/10 bg-white/[0.04] p-3 outline-none focus:border-sky-400/50'
 											placeholder='Add a comment...'
 											value={comment}
 											onChange={(e) => setComment(e.target.value)}
 										/>
-										<button className='btn btn-primary rounded-full btn-sm text-white px-4'>
+										<button className='primary-button h-10 px-4 text-sm'>
 											{isCommenting ? (
 												<span className='loading loading-spinner loading-md'></span>
 											) : (
@@ -270,7 +268,7 @@ const Post = ({ post }) => {
 						</div>
 					</div>
 				</div>
-			</div>
+			</article>
 		</>
 	);
 };

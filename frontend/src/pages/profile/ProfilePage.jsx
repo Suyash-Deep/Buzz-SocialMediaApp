@@ -76,19 +76,19 @@ const ProfilePage = () => {
 
 	return (
 		<>
-			<div className='flex-[4_4_0]  border-r border-gray-700 min-h-screen '>
+			<div className='content-column max-w-[680px]'>
 				{/* HEADER */}
 				{(isLoading || isRefetching) && <ProfileHeaderSkeleton />}
 				{!isLoading && !isRefetching && !user && <p className='text-center text-lg mt-4'>User not found</p>}
 				<div className='flex flex-col'>
 					{!isLoading && !isRefetching && user && (
 						<>
-							<div className='flex gap-10 px-4 py-2 items-center'>
+							<div className='sticky top-0 z-20 flex items-center gap-5 border-b border-white/10 bg-[#0b1120]/85 px-4 py-3 backdrop-blur-xl'>
 								<Link to='/'>
-									<FaArrowLeft className='w-4 h-4' />
+									<FaArrowLeft className='h-4 w-4 text-slate-400 transition hover:text-sky-300' />
 								</Link>
 								<div className='flex flex-col'>
-									<p className='font-bold text-lg'>{user?.fullName}</p>
+									<p className='text-lg font-black'>{user?.fullName}</p>
 									<span className='text-sm text-slate-500'>{POSTS?.length} posts</span>
 								</div>
 							</div>
@@ -96,7 +96,7 @@ const ProfilePage = () => {
 							<div className='relative group/cover'>
 								<img
 									src={coverImg || user?.coverImg || "/cover.png"}
-									className='h-52 w-full object-cover'
+									className='h-56 w-full object-cover'
 									alt='cover image'
 								/>
 								{isMyProfile && (
@@ -121,8 +121,8 @@ const ProfilePage = () => {
 									onChange={(e) => handleImgChange(e, "profileImg")}
 								/>
 								{/* USER AVATAR */}
-								<div className='avatar absolute -bottom-16 left-4'>
-									<div className='w-32 rounded-full relative group/avatar'>
+								<div className='avatar absolute -bottom-16 left-5'>
+									<div className='group/avatar relative w-32 rounded-full border-4 border-[#0b1120] shadow-2xl'>
 										<img src={profileImg || user?.profileImg || "/avatar-placeholder.png"} />
 										<div className='absolute top-5 right-3 p-1 bg-primary rounded-full group-hover/avatar:opacity-100 opacity-0 cursor-pointer'>
 											{isMyProfile && (
@@ -135,11 +135,11 @@ const ProfilePage = () => {
 									</div>
 								</div>
 							</div>
-							<div className='flex justify-end px-4 mt-5'>
+							<div className='mt-5 flex justify-end px-5'>
 								{isMyProfile && <EditProfileModal authUser={authUser} />}
 								{!isMyProfile && (
 									<button
-										className='btn btn-outline rounded-full btn-sm'
+										className='secondary-button min-h-0 h-9 px-4 text-sm'
 										onClick={() => follow(user?._id)}
 									>
 										{isPending && "Loading..."}
@@ -149,7 +149,7 @@ const ProfilePage = () => {
 								)}
 								{(coverImg || profileImg) && (
 									<button
-										className='btn btn-primary rounded-full btn-sm text-white px-4 ml-2'
+										className='primary-button ml-2 min-h-0 h-9 px-4 text-sm'
 										onClick={async () => {
 											await updateProfile({ coverImg, profileImg });
 											setProfileImg(null);
@@ -160,9 +160,9 @@ const ProfilePage = () => {
 									</button>
 								)}
 							</div>
-								<div className='flex flex-col gap-4 mt-14 px-4'>
+								<div className='mt-14 flex flex-col gap-4 px-5'>
 								<div className='flex flex-col'>
-									<span className='font-bold text-lg'>{user?.fullName}</span>
+									<span className='text-2xl font-black tracking-tight'>{user?.fullName}</span>
 									<span className='text-sm text-slate-500'>@{user?.username}</span>
 									<span className='text-sm my-1'>{user?.bio}</span>
 								</div>
@@ -199,7 +199,7 @@ const ProfilePage = () => {
 									</div>
 								</div>
 							</div>
-							<div className='flex w-full border-b border-gray-700 mt-4'>
+							<div className='mt-5 flex w-full border-b border-white/10'>
 								<div
 									className='flex justify-center flex-1 p-3 hover:bg-blue-900 transition duration-300 relative cursor-pointer'
 									onClick={() => setFeedType("posts")}

@@ -53,15 +53,23 @@ const SignUpPage = () => {
 		setFormData({ ...formData, [e.target.name]: e.target.value });
 	};
 	return (
-		<div className='max-w-screen-xl mx-auto flex h-screen px-10'>
-			<div className='flex-1 hidden lg:flex items-center  justify-center'>
-				<XSvg className=' lg:w-2/3 fill-white' />
+		<div className='relative mx-auto flex min-h-screen max-w-7xl overflow-hidden px-5 py-8 lg:px-10'>
+			<div className='pointer-events-none absolute left-[-10rem] top-[-12rem] h-96 w-96 rounded-full bg-sky-500/20 blur-[100px]' />
+			<div className='pointer-events-none absolute bottom-[-12rem] right-[-8rem] h-96 w-96 rounded-full bg-indigo-500/20 blur-[100px]' />
+			<div className='relative hidden flex-1 items-center justify-center lg:flex'>
+				<div className='max-w-lg'>
+					<div className='mb-8 grid h-24 w-24 place-items-center rounded-[2rem] bg-gradient-to-br from-sky-400 to-indigo-500 shadow-2xl shadow-sky-950/50' style={{ animation: "float 5s ease-in-out infinite" }}><XSvg className='h-16 w-16 fill-white' /></div>
+					<h2 className='text-5xl font-black leading-tight tracking-tight'>Find your people.<br/><span className='bg-gradient-to-r from-sky-300 to-indigo-400 bg-clip-text text-transparent'>Share your spark.</span></h2>
+					<p className='mt-5 max-w-md text-lg leading-8 text-slate-400'>Create your profile and step into conversations that feel alive.</p>
+				</div>
 			</div>
-			<div className='flex-1 flex flex-col justify-center items-center'>
-				<form className='lg:w-2/3  mx-auto md:mx-20 flex gap-4 flex-col' onSubmit={handleSubmit}>
-					<XSvg className='w-24 lg:hidden fill-white' />
-					<h1 className='text-4xl font-extrabold text-white'>Join today.</h1>
-					<label className='input input-bordered rounded flex items-center gap-2'>
+			<div className='relative flex flex-1 items-center justify-center'>
+				<div className='glass-card w-full max-w-2xl rounded-[2rem] p-6 sm:p-9 lg:p-10'>
+				<form className='flex flex-col gap-4' onSubmit={handleSubmit}>
+					<div className='mb-2 flex items-center gap-3 lg:hidden'><span className='grid h-11 w-11 place-items-center rounded-2xl bg-gradient-to-br from-sky-400 to-indigo-500'><XSvg className='h-7 w-7 fill-white' /></span><span className='text-xl font-black'>Buzz.</span></div>
+					<p className='text-xs font-bold uppercase tracking-[0.22em] text-sky-400'>New here?</p>
+					<h1 className='mb-2 text-4xl font-black tracking-tight text-white'>Join the buzz.</h1>
+					<label className='field-shell'>
 						<MdOutlineMail />
 						<input
 							type='email'
@@ -72,8 +80,8 @@ const SignUpPage = () => {
 							value={formData.email}
 						/>
 					</label>
-					<div className='flex gap-4 flex-wrap'>
-						<label className='input input-bordered rounded flex items-center gap-2 flex-1'>
+					<div className='grid grid-cols-1 gap-4 sm:grid-cols-2'>
+						<label className='field-shell w-full'>
 							<FaUser />
 							<input
 								type='text'
@@ -84,7 +92,7 @@ const SignUpPage = () => {
 								value={formData.username}
 							/>
 						</label>
-						<label className='input input-bordered rounded flex items-center gap-2 flex-1'>
+						<label className='field-shell w-full'>
 							<MdDriveFileRenameOutline />
 							<input
 								type='text'
@@ -96,7 +104,7 @@ const SignUpPage = () => {
 							/>
 						</label>
 					</div>
-					<label className='input input-bordered rounded flex items-center gap-2'>
+					<label className='field-shell'>
 						<MdPassword />
 						<input
 							type='password'
@@ -107,16 +115,17 @@ const SignUpPage = () => {
 							value={formData.password}
 						/>
 					</label>
-					<button className='btn rounded-full btn-primary text-white'>
+					<button className='primary-button mt-2 h-12'>
 						{isPending ? "Loading..." : "Sign up"}
 					</button>
-					{isError && <p className='text-red-500'>{error.message}</p>}
+					{isError && <p className='rounded-xl border border-rose-500/20 bg-rose-500/10 p-3 text-sm text-rose-300'>{error.message}</p>}
 				</form>
-				<div className='flex flex-col lg:w-2/3 gap-2 mt-4'>
-					<p className='text-white text-lg'>Already have an account?</p>
+				<div className='mt-7 border-t border-white/10 pt-6 text-center'>
+					<p className='mb-3 text-sm text-slate-400'>Already have an account?</p>
 					<Link to='/login'>
-						<button className='btn rounded-full btn-primary text-white btn-outline w-full'>Sign in</button>
+						<button className='secondary-button h-12 w-full'>Sign in</button>
 					</Link>
+				</div>
 				</div>
 			</div>
 		</div>

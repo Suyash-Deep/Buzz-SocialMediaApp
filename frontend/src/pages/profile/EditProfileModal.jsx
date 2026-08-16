@@ -35,13 +35,13 @@ const EditProfileModal = ({ authUser }) => {
 	return (
 		<>
 			<button
-				className='btn btn-outline rounded-full btn-sm'
+				className='secondary-button min-h-0 h-9 px-4 text-sm'
 				onClick={() => document.getElementById("edit_profile_modal").showModal()}
 			>
 				Edit profile
 			</button>
 			<dialog id='edit_profile_modal' className='modal'>
-				<div className='modal-box border rounded-md border-gray-700 shadow-md'>
+				<div className='modal-box rounded-3xl border border-white/10 bg-[#0b1120] shadow-2xl'>
 					<h3 className='font-bold text-lg my-3'>Update Profile</h3>
 					<form
 						className='flex flex-col gap-4'
@@ -54,7 +54,7 @@ const EditProfileModal = ({ authUser }) => {
 							<input
 								type='text'
 								placeholder='Full Name'
-								className='flex-1 input border border-gray-700 rounded p-2 input-md'
+								className='min-w-0 flex-1 rounded-xl border border-white/10 bg-white/[0.04] p-3 outline-none focus:border-sky-400/50'
 								value={formData.fullName}
 								name='fullName'
 								onChange={handleInputChange}
@@ -62,7 +62,7 @@ const EditProfileModal = ({ authUser }) => {
 							<input
 								type='text'
 								placeholder='Username'
-								className='flex-1 input border border-gray-700 rounded p-2 input-md'
+								className='min-w-0 flex-1 rounded-xl border border-white/10 bg-white/[0.04] p-3 outline-none focus:border-sky-400/50'
 								value={formData.username}
 								name='username'
 								onChange={handleInputChange}
@@ -72,14 +72,14 @@ const EditProfileModal = ({ authUser }) => {
 							<input
 								type='email'
 								placeholder='Email'
-								className='flex-1 input border border-gray-700 rounded p-2 input-md'
+								className='min-w-0 flex-1 rounded-xl border border-white/10 bg-white/[0.04] p-3 outline-none focus:border-sky-400/50'
 								value={formData.email}
 								name='email'
 								onChange={handleInputChange}
 							/>
 							<textarea
 								placeholder='Bio'
-								className='flex-1 input border border-gray-700 rounded p-2 input-md'
+								className='min-w-0 flex-1 rounded-xl border border-white/10 bg-white/[0.04] p-3 outline-none focus:border-sky-400/50'
 								value={formData.bio}
 								name='bio'
 								onChange={handleInputChange}
@@ -89,7 +89,7 @@ const EditProfileModal = ({ authUser }) => {
 							<input
 								type='password'
 								placeholder='Current Password'
-								className='flex-1 input border border-gray-700 rounded p-2 input-md'
+								className='min-w-0 flex-1 rounded-xl border border-white/10 bg-white/[0.04] p-3 outline-none focus:border-sky-400/50'
 								value={formData.currentPassword}
 								name='currentPassword'
 								onChange={handleInputChange}
@@ -97,7 +97,7 @@ const EditProfileModal = ({ authUser }) => {
 							<input
 								type='password'
 								placeholder='New Password'
-								className='flex-1 input border border-gray-700 rounded p-2 input-md'
+								className='min-w-0 flex-1 rounded-xl border border-white/10 bg-white/[0.04] p-3 outline-none focus:border-sky-400/50'
 								value={formData.newPassword}
 								name='newPassword'
 								onChange={handleInputChange}
@@ -106,12 +106,12 @@ const EditProfileModal = ({ authUser }) => {
 						<input
 							type='text'
 							placeholder='Link'
-							className='flex-1 input border border-gray-700 rounded p-2 input-md'
+							className='min-w-0 flex-1 rounded-xl border border-white/10 bg-white/[0.04] p-3 outline-none focus:border-sky-400/50'
 							value={formData.link}
 							name='link'
 							onChange={handleInputChange}
 						/>
-						<button className='btn btn-primary rounded-full btn-sm text-white'>
+						<button className='primary-button h-11'>
 							{isUpdatingProfile ? "Updating..." : "Update"}
 						</button>
 					</form>

@@ -49,16 +49,16 @@ const NotificationPage = () => {
 
 	return (
 		<>
-			<div className='flex-[4_4_0] border-l border-r border-gray-700 min-h-screen'>
-				<div className='flex justify-between items-center p-4 border-b border-gray-700'>
-					<p className='font-bold'>Notifications</p>
+			<div className='content-column max-w-[680px]'>
+				<div className='sticky top-0 z-20 flex items-center justify-between border-b border-white/10 bg-[#0b1120]/85 p-5 backdrop-blur-xl'>
+					<div><p className='text-xs font-bold uppercase tracking-[0.2em] text-sky-400'>Activity</p><h1 className='mt-1 text-2xl font-black tracking-tight'>Notifications</h1></div>
 					<div className='dropdown '>
 						<div tabIndex={0} role='button' className='m-1'>
-							<IoSettingsOutline className='w-4' />
+							<IoSettingsOutline className='h-5 w-5 text-slate-400 transition hover:text-white' />
 						</div>
 						<ul
 							tabIndex={0}
-							className='dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52'
+							className='dropdown-content z-[1] menu w-56 rounded-2xl border border-white/10 bg-[#111827] p-2 shadow-2xl'
 						>
 							<li>
 								<a onClick={deleteNotifications}>Delete all notifications</a>
@@ -71,10 +71,10 @@ const NotificationPage = () => {
 						<LoadingSpinner size='lg' />
 					</div>
 				)}
-				{notifications?.length === 0 && <div className='text-center p-4 font-bold'>No notifications 🤔</div>}
+				{notifications?.length === 0 && <div className='m-5 rounded-3xl border border-dashed border-white/10 p-12 text-center'><p className='text-4xl'>✨</p><p className='mt-3 font-bold'>You are all caught up</p><p className='mt-1 text-sm text-slate-500'>New activity will show up here.</p></div>}
 				{notifications?.map((notification) => (
-					<div className='border-b border-gray-700' key={notification._id}>
-						<div className='flex gap-2 p-4'>
+					<div className='mx-4 mt-3 rounded-2xl border border-white/10 bg-white/[0.025] transition hover:bg-white/[0.05]' key={notification._id}>
+						<div className='flex gap-3 p-4'>
 							{notification.type === "follow" && <FaUser className='w-7 h-7 text-primary' />}
 							{notification.type === "like" && <FaHeart className='w-7 h-7 text-red-500' />}
 							<Link to={`/profile/${notification.from.username}`}>

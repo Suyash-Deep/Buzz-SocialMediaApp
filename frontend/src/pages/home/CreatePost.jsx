@@ -1,5 +1,4 @@
 import { CiImageOn } from "react-icons/ci";
-import { BsEmojiSmileFill } from "react-icons/bs";
 import { useRef, useState } from "react";
 import { IoCloseSharp } from "react-icons/io5";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -13,10 +12,6 @@ const CreatePost = () => {
 
 	const {data:authUser} = useQuery({queryKey: ["authUser"]});
 	const queryClient = useQueryClient();
-
-	const data = {
-		profileImg: "/avatars/boy1.png",
-	};
 
 	const {mutate:createPost,isError,isPending,error} = useMutation({
 	mutationFn: async ({ text, img }) => {
@@ -63,21 +58,21 @@ const CreatePost = () => {
 	};
 
 	return (
-		<div className='flex p-4 items-start gap-4 border-b border-gray-700'>
+		<div className='m-4 flex items-start gap-3 rounded-3xl border border-white/10 bg-white/[0.035] p-4 shadow-xl shadow-black/10'>
 			<div className='avatar'>
-				<div className='w-8 rounded-full'>
+				<div className='w-10 rounded-full ring-2 ring-sky-400/30'>
 					<img src={authUser.profileImg || "/avatar-placeholder.png"} />
 				</div>
 			</div>
-			<form className='flex flex-col gap-2 w-full' onSubmit={handleSubmit}>
+			<form className='flex w-full flex-col gap-3' onSubmit={handleSubmit}>
 				<textarea
-					className='textarea w-full p-0 text-lg resize-none border-none focus:outline-none  border-gray-800'
-					placeholder='Post Something'
+					className='min-h-20 w-full resize-none border-none bg-transparent p-1 text-lg text-white outline-none placeholder:text-slate-500'
+					placeholder="What's buzzing?"
 					value={text}
 					onChange={(e) => setText(e.target.value)}
 				/>
 				{img && (
-					<div className='relative w-72 mx-auto'>
+					<div className='relative w-full'>
 						<IoCloseSharp
 							className='absolute top-0 right-0 text-white bg-gray-800 rounded-full w-5 h-5 cursor-pointer'
 							onClick={() => {
@@ -85,20 +80,20 @@ const CreatePost = () => {
 								imgRef.current.value = null;
 							}}
 						/>
-						<img src={img} className='w-full mx-auto h-72 object-contain rounded' />
+						<img src={img} className='mx-auto max-h-96 w-full rounded-2xl object-contain' />
 					</div>
 				)}
 
-				<div className='flex justify-between border-t py-2 border-t-gray-700'>
+				<div className='flex justify-between border-t border-white/10 pt-3'>
 					<div className='flex gap-1 items-center'>
 						<CiImageOn
-							className='fill-primary w-6 h-6 cursor-pointer'
+							className='h-6 w-6 cursor-pointer fill-sky-400 transition hover:scale-110 hover:fill-sky-300'
 							onClick={() => imgRef.current.click()}
 						/>
 						{/* <BsEmojiSmileFill className='fill-primary w-5 h-5 cursor-pointer' /> */}
 					</div>
 					<input type='file' accept="image/*" hidden ref={imgRef} onChange={handleImgChange} />
-					<button className='btn btn-primary rounded-full btn-sm text-white px-4'>
+					<button disabled={isPending || (!text.trim() && !img)} className='primary-button min-h-0 h-9 px-5 text-sm'>
 						{isPending ? "Posting..." : "Post"}
 					</button>
 				</div>

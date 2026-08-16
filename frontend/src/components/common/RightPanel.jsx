@@ -25,12 +25,13 @@ const RightPanel = () => {
 
 	const { follow, isPending } = useFollow();
 
-	if (suggestedUsers?.length === 0) return <div className='md:w-64 w-0'></div>;
+	if (suggestedUsers?.length === 0) return <div className='hidden w-72 xl:block'></div>;
 
 	return (
-		<div className='hidden lg:block my-4 mx-2'>
-			<div className='bg-[#111f3b] p-4 rounded-md sticky top-2'>
-				<p className='font-bold'>Who to follow</p>
+		<div className='mx-5 hidden w-72 xl:block'>
+			<div className='glass-card sticky top-5 mt-5 rounded-3xl p-5'>
+				<p className='text-xs font-bold uppercase tracking-[0.2em] text-sky-400'>Discover</p>
+				<p className='mb-5 mt-1 text-xl font-black tracking-tight'>People to follow</p>
 				<div className='flex flex-col gap-4'>
 					{/* item */}
 					{isLoading && (
@@ -45,12 +46,12 @@ const RightPanel = () => {
 						suggestedUsers?.map((user) => (
 							<Link
 								to={`/profile/${user.username}`}
-								className='flex items-center justify-between gap-4'
+								className='flex items-center justify-between gap-3 rounded-2xl p-2 transition hover:bg-white/[0.05]'
 								key={user._id}
 							>
 								<div className='flex gap-2 items-center'>
 									<div className='avatar'>
-										<div className='w-8 rounded-full'>
+										<div className='w-9 rounded-full ring-2 ring-white/10'>
 											<img src={user.profileImg || "/avatar-placeholder.png"} />
 										</div>
 									</div>
@@ -63,7 +64,7 @@ const RightPanel = () => {
 								</div>
 								<div>
 									<button
-										className='btn bg-white text-black hover:bg-white hover:opacity-90 rounded-full btn-sm'
+										className='secondary-button min-h-0 h-8 px-3 text-xs'
 										onClick={(e) => {
 											e.preventDefault();
 											follow(user._id);

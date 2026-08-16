@@ -43,7 +43,7 @@ function App() {
 	}
 
   return (
-    <div className='flex max-w-6xl mx-auto'>
+    <div className='app-shell'>
       {/* a common component  */}
      {authUser &&  <Sidebar/> }
 			<Routes>
